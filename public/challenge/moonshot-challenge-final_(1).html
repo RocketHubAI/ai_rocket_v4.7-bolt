@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Rocket $5M AI Moonshot Challenge | RocketHub.AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange-start: #FF6B35;
+            --orange-mid: #F7931E;
+            --green-end: #00C49F;
+            --green-dark: #00A67E;
+            --blue-ai: #4A9EFF;
+            --dark-bg: #0A0F1C;
+            --dark-card: #111827;
+            --dark-surface: #1F2937;
+            --text-primary: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glow-orange: rgba(255, 107, 53, 0.3);
+            --glow-green: rgba(0, 196, 159, 0.3);
+            --glow-blue: rgba(74, 158, 255, 0.3);
+            --gold: #FFD700;
+            --silver: #C0C0C0;
+            --bronze: #CD7F32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+            background: var(--dark-surface);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            color: var(--text-primary);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--orange-start), var(--orange-mid), var(--green-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* AI Rocket Branding */
+        .ai-rocket-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ai-rocket-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #5BA4E6, #3B82C4);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 
+                0 8px 32px rgba(59, 130, 196, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-rocket-text {
+            font-size: clamp(3.5rem, 8vw, 5.5rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .powered-by {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 20%, var(--glow-orange) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, var(--glow-green) 0%, transparent 50%),
+                var(--dark-bg);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            padding: 0.6rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1rem;
+        }
+
+        .hero-prize {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .value {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .hero-stat .label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            color: var(--text-primary);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--dark-card);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-surface);
+            border-color: var(--orange-start);
+        }
+
+        .terms-notice {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .terms-notice a {
+            color: var(--orange-start);
+            text-decoration: none;
+        }
+
+        .terms-notice a:hover {
+            text-decoration: underline;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Prizes Section */
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .prize-card {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .prize-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+        }
+
+        .prize-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--orange-start);
+            box-shadow: 0 16px 48px rgba(255, 107, 53, 0.3);
+        }
+
+        .prize-card.gold::before { background: var(--gold); }
+        .prize-card.silver::before { background: var(--silver); }
+        .prize-card.bronze::before { background: var(--bronze); }
+
+        .prize-medal {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .prize-place {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .prize-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .prize-equity {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .prize-perk {
+            font-size: 1.1rem;
+            color: var(--green-end);
+            font-weight: 600;
+        }
+
+        .bonus-prize {
+            background: var(--dark-card);
+            border: 2px solid var(--green-end);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .bonus-prize h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .bonus-prize p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .bonus-prize strong {
+            color: var(--green-end);
+        }
+
+        /* Positive Impact Mission Section */
+        .impact-mission-section {
+            margin: 4rem 0;
+        }
+
+        .impact-mission-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(0, 196, 159, 0.15));
+            border: 2px solid var(--orange-start);
+            border-radius: 24px;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-mission-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .impact-mission-card:hover {
+            border-color: var(--green-end);
+            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .impact-mission-icon {
+            font-size: 5rem;
+            flex-shrink: 0;
+            z-index: 1;
+            filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.4));
+        }
+
+        .impact-mission-content {
+            z-index: 1;
+        }
+
+        .impact-mission-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 800;
+        }
+
+        .impact-mission-belief {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--orange-start);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .impact-mission-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .impact-mission-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .impact-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--orange-start);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .impact-badge-highlight {
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            border: none;
+        }
+
+        /* RBG Matrix Section */
+        .quote-box {
+            background: var(--dark-card);
+            border-left: 4px solid var(--orange-start);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            font-style: italic;
+        }
+
+        .quote-box p {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .quote-box cite {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Astra Scoring Banner */
+        .astra-scoring-banner {
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(0, 196, 159, 0.1));
+            border: 2px solid var(--blue-ai);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .astra-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .astra-icon {
+            font-size: 3rem;
+        }
+
+        .astra-header h3 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .astra-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .astra-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .astra-description strong {
+            color: var(--text-primary);
+        }
+
+        .astra-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .astra-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .astra-feature-icon {
+            font-size: 1.5rem;
+        }
+
+        .astra-feature span:last-child {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* Impact Statement Banner */
+        .impact-statement-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(0, 196, 159, 0.15));
+            border: 2px solid var(--orange-start);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .impact-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .impact-icon {
+            font-size: 3rem;
+        }
+
+        .impact-header h3 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .impact-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .impact-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .impact-description strong {
+            color: var(--text-primary);
+        }
+
+        .impact-question {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--orange-start);
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Scoring Breakdown */
+        .scoring-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .scoring-item {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .scoring-item:hover {
+            border-color: var(--orange-start);
+            transform: translateY(-4px);
+        }
+
+        .scoring-percentage {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .scoring-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .scoring-details {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* RBG Grid */
+        .rbg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .rbg-card {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rbg-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .rbg-card.run::before { background: var(--orange-start); }
+        .rbg-card.build::before { background: var(--orange-mid); }
+        .rbg-card.grow::before { background: var(--green-end); }
+
+        .rbg-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(255, 107, 53, 0.2);
+        }
+
+        .rbg-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rbg-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .rbg-card > p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .rbg-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .rbg-example {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--orange-start);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline Section */
+        .timeline {
+            max-width: 900px;
+            margin: 4rem auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--orange-start), var(--green-end));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--orange-start);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+            z-index: 2;
+        }
+
+        .timeline-date {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--orange-start);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--orange-start);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 36px rgba(255, 107, 53, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            border: 4px solid var(--dark-bg);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .step-card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Eligibility Section */
+        .eligibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .eligibility-card {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .eligibility-card:hover {
+            border-color: var(--green-end);
+            transform: translateY(-4px);
+        }
+
+        .eligibility-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .eligibility-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .eligibility-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--orange-start);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.15);
+        }
+
+        .faq-item h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .faq-item p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Accordion */
+        .accordion {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .accordion-item {
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: var(--orange-start);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .accordion-icon {
+            font-size: 1.8rem;
+        }
+
+        .accordion-title h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .accordion-arrow {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+        }
+
+        .accordion-body {
+            padding: 0 2rem 2rem;
+        }
+
+        .accordion-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .accordion-body li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .accordion-body li:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-body strong {
+            color: var(--text-primary);
+        }
+
+        .accordion-body p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Terms Section */
+        .terms-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--dark-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 4rem;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .terms-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .terms-section-item {
+            margin-bottom: 3rem;
+        }
+
+        .terms-section-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--orange-start);
+            margin-bottom: 1rem;
+        }
+
+        .terms-section-item p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .terms-section-item a {
+            color: var(--orange-start);
+            text-decoration: none;
+        }
+
+        .terms-section-item a:hover {
+            text-decoration: underline;
+        }
+
+        .terms-section-item strong {
+            color: var(--text-primary);
+        }
+
+        .terms-effective {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .terms-effective p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: 
+                radial-gradient(ellipse 60% 40% at 50% 50%, var(--glow-orange) 0%, transparent 50%),
+                var(--dark-bg);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-value {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cta-terms-notice {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .cta-terms-notice a {
+            color: var(--orange-start);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            background: var(--dark-card);
+        }
+
+        .footer-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange-start);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--orange-start), var(--green-end));
+            border: none;
+            border-radius: 50%;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 24px rgba(255, 107, 53, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-tabs {
+                padding: 0.5rem 1rem;
+                gap: 0.25rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .impact-mission-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 2.5rem 2rem;
+            }
+
+            .impact-mission-icon {
+                font-size: 4rem;
+            }
+
+            .impact-mission-content h3 {
+                font-size: 1.8rem;
+            }
+
+            .impact-mission-belief {
+                font-size: 1.2rem;
+            }
+
+            .impact-mission-badges {
+                justify-content: center;
+            }
+
+            .astra-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .impact-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .terms-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <a href="#home" class="nav-tab active">Home</a>
+        <a href="#prizes" class="nav-tab">Prizes</a>
+        <a href="#rbg" class="nav-tab">RBG Matrix</a>
+        <a href="#timeline" class="nav-tab">Timeline</a>
+        <a href="#how" class="nav-tab">How It Works</a>
+        <a href="#eligibility" class="nav-tab">Eligibility</a>
+        <a href="#faq" class="nav-tab">FAQ</a>
+        <a href="#terms" class="nav-tab">Terms</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 Challenge Launches Jan 1, 2026</div>
+            
+            <div class="ai-rocket-brand">
+                <div class="ai-rocket-icon">🚀</div>
+                <div class="ai-rocket-text">AI Rocket</div>
+            </div>
+            <div class="powered-by">AI Built for Entrepreneurs and Their Teams</div>
+            
+            <h1>
+                <span class="gradient-text-gold">$5M AI Moonshot Challenge</span>
+            </h1>
+            <p class="hero-subtitle">Launch Your Team Into an AI-Powered Business with Free & Unlimited Use of AI Rocket's Powerful AI Suite</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="value">$5M</div>
+                    <div class="label">Total Prize Pool</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">300</div>
+                    <div class="label">Team Slots</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">90</div>
+                    <div class="label">Days Unlimited</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">10</div>
+                    <div class="label">Winners</div>
+                </div>
+            </div>
+
+            <div class="cta-group">
+                <a href="#signup" class="btn btn-primary">🚀 Enter Challenge</a>
+                <a href="#terms" class="btn btn-secondary">View Terms</a>
+            </div>
+            <p class="terms-notice">By entering the challenge, you agree to the <a href="#terms">Challenge Terms & Conditions</a></p>
+        </div>
+    </section>
+
+    <!-- Prizes Section -->
+    <section class="section" id="prizes">
+        <div class="section-header">
+            <h2><span class="gradient-text">Prize Structure</span></h2>
+            <p>Win equity in RocketHub.AI plus Lifetime Ultra Plan subscription.</p>
+        </div>
+
+        <!-- Podium - Top 3 -->
+        <h3 style="text-align: center; font-size: 1.75rem; color: var(--text-primary); margin-bottom: 1.5rem;">The Podium</h3>
+        <div class="prizes-grid">
+            <div class="prize-card gold">
+                <div class="prize-medal">🥇</div>
+                <div class="prize-place">1st Place</div>
+                <div class="prize-amount">$2,000,000</div>
+                <div class="prize-equity">Equity prize in RocketHub.AI</div>
+                <div class="prize-perk">Lifetime Ultra Plan</div>
+            </div>
+
+            <div class="prize-card silver">
+                <div class="prize-medal">🥈</div>
+                <div class="prize-place">2nd Place</div>
+                <div class="prize-amount">$1,000,000</div>
+                <div class="prize-equity">Equity prize in RocketHub.AI</div>
+                <div class="prize-perk">Lifetime Ultra Plan</div>
+            </div>
+
+            <div class="prize-card bronze">
+                <div class="prize-medal">🥉</div>
+                <div class="prize-place">3rd Place</div>
+                <div class="prize-amount">$600,000</div>
+                <div class="prize-equity">Equity prize in RocketHub.AI</div>
+                <div class="prize-perk">Lifetime Ultra Plan</div>
+            </div>
+        </div>
+
+        <!-- Top 10 Finishers -->
+        <h3 style="text-align: center; font-size: 1.75rem; color: var(--text-primary); margin: 2.5rem 0 1.5rem;">Top 10 Finishers</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">4th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$400,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">5th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$300,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">6th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$225,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">7th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$175,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">8th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$125,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">9th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$100,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+            <div style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem;">10th</div>
+                <div style="font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, var(--orange-start), var(--green-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$75,000</div>
+                <div style="font-size: 0.8rem; color: var(--green-end);">Lifetime Ultra Plan</div>
+            </div>
+        </div>
+
+        <div class="bonus-prize">
+            <h3>🎁 Participation Bonus</h3>
+            <p>All teams that submit valid prize applications receive a <strong>1-year unlimited subscription</strong> to AI Rocket!</p>
+        </div>
+
+        <!-- Positive Impact Mission Section -->
+        <div class="impact-mission-section">
+            <div class="impact-mission-card">
+                <div class="impact-mission-icon">🌍</div>
+                <div class="impact-mission-content">
+                    <h3>Our Belief: EPIC Entrepreneurs Change the World for Good</h3>
+                    <p class="impact-mission-belief">"The most powerful businesses are those that create positive impact"</p>
+                    <p>We're fueling entrepreneurs and their teams to create lasting positive impacts using AI-Powered Business with AI Rocket. This challenge isn't just about building better businesses—it's about building a better world.</p>
+                    <div class="impact-mission-badges">
+                        <span class="impact-badge">🎯 25% Scoring: Impact Statement</span>
+                        <span class="impact-badge impact-badge-highlight">💡 Mission-Driven Innovation</span>
+                        <span class="impact-badge">🚀 World-Changing Entrepreneurs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RBG Matrix Section -->
+    <section class="section" id="rbg">
+        <div class="section-header">
+            <h2><span class="gradient-text">Run • Build • Grow Matrix</span></h2>
+            <p>With AI transformation nearly free, RBG replaces ROI as the measure for AI-Powered business success. Show us how you're using AI to transform across all three dimensions.</p>
+        </div>
+
+        <div class="quote-box">
+            <p>"With the cost of transformational AI nearly free, RBG (Run.Build.Grow with AI) can replace ROI as the goal for AI-Powered business."</p>
+            <cite>— RocketHub AI Philosophy</cite>
+        </div>
+
+        <!-- Impact Statement Banner -->
+        <div class="impact-statement-banner">
+            <div class="impact-header">
+                <div class="impact-icon">🌟</div>
+                <div>
+                    <h3>Impact Statement Required</h3>
+                    <p class="impact-subtitle">Aligning with Our Core Belief and Mission</p>
+                </div>
+            </div>
+            <p class="impact-description">Teams submitting their final application will answer this critical question as part of their Impact Statement:</p>
+            <div class="impact-question">
+                "What positive impact are you able to make in the world with your new AI-Powered business?"
+            </div>
+            <p class="impact-description">Your Impact Statement, combined with your Run, Build, Grow responses, will constitute <strong>50% of your weighted challenge score</strong>. This ensures we're not just building businesses—we're building businesses that matter.</p>
+        </div>
+
+        <!-- Scoring Breakdown -->
+        <div class="scoring-breakdown">
+            <div class="scoring-item">
+                <div class="scoring-percentage">25%</div>
+                <div class="scoring-label">Impact Statement</div>
+                <div class="scoring-details">Your answer demonstrating the positive impact your AI-Powered business makes in the world</div>
+            </div>
+            <div class="scoring-item">
+                <div class="scoring-percentage">25%</div>
+                <div class="scoring-label">RBG Answers</div>
+                <div class="scoring-details">Your written summaries (100 words each) for Run, Build, and Grow transformations</div>
+            </div>
+            <div class="scoring-item">
+                <div class="scoring-percentage">50%</div>
+                <div class="scoring-label">Astra Metrics</div>
+                <div class="scoring-details">Automated tracking of your team's AI Rocket usage across RBG dimensions throughout the challenge</div>
+            </div>
+        </div>
+
+        <!-- Astra Scoring System -->
+        <div class="astra-scoring-banner">
+            <div class="astra-header">
+                <div class="astra-icon">🤖</div>
+                <div>
+                    <h3>Astra Intelligence Scoring</h3>
+                    <p class="astra-subtitle">Proprietary AI-Powered Evaluation System</p>
+                </div>
+            </div>
+            <p class="astra-description">Throughout the challenge, <strong>Astra Intelligence</strong> will automatically track and assign weighted scores to each team based on how they use AI Rocket across the Run, Build, and Grow dimensions. This internal scoring system runs silently in the background—teams won't see their scores until the challenge ends.</p>
+            <div class="astra-features">
+                <div class="astra-feature">
+                    <span class="astra-feature-icon">📊</span>
+                    <span>Real-time usage analysis</span>
+                </div>
+                <div class="astra-feature">
+                    <span class="astra-feature-icon">🎯</span>
+                    <span>Weighted RBG scoring</span>
+                </div>
+                <div class="astra-feature">
+                    <span class="astra-feature-icon">🔒</span>
+                    <span>Hidden until challenge ends</span>
+                </div>
+                <div class="astra-feature">
+                    <span class="astra-feature-icon">📝</span>
+                    <span>Combined with Final Application</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rbg-grid">
+            <div class="rbg-card run">
+                <div class="rbg-icon">⚡</div>
+                <h3>RUN</h3>
+                <p>How has AI Rocket transformed your team's ability to run the business using AI?</p>
+                <div class="rbg-examples">
+                    <div class="rbg-example">Automated daily operations</div>
+                    <div class="rbg-example">AI-powered decision making</div>
+                    <div class="rbg-example">Streamlined workflows</div>
+                    <div class="rbg-example">Real-time business intelligence</div>
+                </div>
+            </div>
+
+            <div class="rbg-card build">
+                <div class="rbg-icon">🔧</div>
+                <h3>BUILD</h3>
+                <p>How has AI Rocket helped you build valuable tools for the business using AI?</p>
+                <div class="rbg-examples">
+                    <div class="rbg-example">Custom AI workflows</div>
+                    <div class="rbg-example">Automated reporting systems</div>
+                    <div class="rbg-example">Integration with existing tools</div>
+                    <div class="rbg-example">New product capabilities</div>
+                </div>
+            </div>
+
+            <div class="rbg-card grow">
+                <div class="rbg-icon">📈</div>
+                <h3>GROW</h3>
+                <p>How has AI Rocket helped you grow revenue for the business using AI?</p>
+                <div class="rbg-examples">
+                    <div class="rbg-example">Enhanced customer acquisition</div>
+                    <div class="rbg-example">Improved retention strategies</div>
+                    <div class="rbg-example">Revenue optimization</div>
+                    <div class="rbg-example">Market expansion capabilities</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section" id="timeline">
+        <div class="section-header">
+            <h2><span class="gradient-text">Challenge Timeline</span></h2>
+            <p>90 days to transform your business with AI</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Dec, 2025</div>
+                    <div class="timeline-title">📝 Early-Access Signups</div>
+                    <div class="timeline-description">Invited Entrepreneurs & Teams can signup beginning mid-December 2025 and Gain Entry before the Jan 1, 2026 Challenge Launch.</div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan 1, 2026</div>
+                    <div class="timeline-title">🚀 Challenge Begins</div>
+                    <div class="timeline-description">The first 300 teams to Gain Entry (Launch their AI Rocket) receive Free & Unlimited 90 Day Access to AI Rocket.</div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan 1 - Mar 15</div>
+                    <div class="timeline-title">💻 Challenge Period</div>
+                    <div class="timeline-description">Use AI Rocket to transform your business. Astra Intelligence tracks your usage automatically. Complete social media requirements and share your transformation journey.</div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Mar 16-20</div>
+                    <div class="timeline-title">📝 Final Applications</div>
+                    <div class="timeline-description">Submit your Prize Application with Impact Statement and RBG Matrix summaries (100 words each for Run, Build, Grow). Application window closes March 20.</div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Mar 21-27</div>
+                    <div class="timeline-title">🏆 Winners Announced</div>
+                    <div class="timeline-description">AI Rocket Advisory Committee reviews all applications and Astra scores. Top 10 teams receive equity prizes and Lifetime Ultra Plan subscriptions.</div>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" id="how">
+        <div class="section-header">
+            <h2><span class="gradient-text">How It Works</span></h2>
+            <p>Simple steps to win $5M in prizes</p>
+        </div>
+
+        <div class="how-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">✍️</div>
+                <h3>Register Your Team</h3>
+                <p>Early-Access signup begins in December 2025. Each team includes 1 primary user plus up to 2 additional team members. Spots limited to 300 teams.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">🎯</div>
+                <h3>Gain Your Entry</h3>
+                <p>Complete the Fuel, Boosters and Guidance levels to Launch Your AI Rocket. The first 300 teams to Launch their AI Rocket will be entered into the Challenge with Free & Unlimited 90 Day Access to AI Rocket.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">🚀</div>
+                <h3>Use AI Rocket</h3>
+                <p>Get unlimited access for 90 days. Transform your business with AI across Run, Build, and Grow dimensions. Astra tracks your usage automatically.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-icon">📱</div>
+                <h3>Engage & Share</h3>
+                <p>Complete minimum 5 social media posts tagging RocketHub.AI and AI Rocket. Share your transformation journey and inspire other entrepreneurs.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-icon">📝</div>
+                <h3>Submit Application</h3>
+                <p>During Mar 16-20, submit your final application with Impact Statement and RBG summaries (100 words each). All submitters get 1-year unlimited access.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <div class="step-icon">🏆</div>
+                <h3>Win Prizes</h3>
+                <p>Top 10 teams win equity prizes and Lifetime Ultra Plan subscriptions. Advisory Committee evaluates Impact Statement (25%), RBG answers (25%), and Astra scores (50%).</p>
+            </div>
+        </div>
+
+        <!-- Detailed Accordion -->
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <div class="accordion-icon">🎯</div>
+                        <h4>Winner Criteria & Scoring</h4>
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ul>
+                            <li><strong>Impact Statement (25%):</strong> Your answer to "What positive impact are you able to make in the world with your new AI-Powered business?" demonstrating alignment with our core mission that EPIC Entrepreneurs Change the World for Good</li>
+                            <li><strong>RBG Matrix Summaries (25%):</strong> Submit Prize Application form during March 16-20 window with written RBG Matrix summaries (100 words each for Run, Build, Grow)</li>
+                            <li><strong>Astra Intelligence Score (50%):</strong> Throughout the challenge, Astra automatically tracks your team's AI Rocket usage and assigns weighted RBG scores (hidden until challenge ends)</li>
+                            <li><strong>Social Media Posts:</strong> Minimum 5 unique posts tagging RocketHub and AI Rocket across LinkedIn, X, or Facebook</li>
+                            <li><strong>Additional Factors:</strong> Bonus points available for inviting other teams and exceptional social engagement</li>
+                            <li><strong>Combined Evaluation:</strong> Winners selected by AI Rocket Advisory Committee using the scoring breakdown above</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <div class="accordion-icon">📱</div>
+                        <h4>Social Media Requirements</h4>
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p style="margin-bottom: 1rem;">Credit for the required 5 minimum posts when tagging both RocketHub.AI and AI Rocket with unique posts (not reposts) on approved platforms:</p>
+                        <ul>
+                            <li><strong>LinkedIn:</strong> Professional updates about your AI transformation journey</li>
+                            <li><strong>X/Twitter:</strong> Real-time insights and progress updates</li>
+                            <li><strong>Facebook:</strong> Community engagement and milestone celebrations</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Posts must be authentic, substantive content about your experience. Simple mentions don't count—share real insights, learnings, and transformations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <div class="accordion-icon">👥</div>
+                        <h4>Team Structure</h4>
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ul>
+                            <li><strong>Primary User:</strong> The registered team leader who manages the account and challenge participation</li>
+                            <li><strong>Additional Members:</strong> Up to 2 additional team members can be invited for full unlimited access</li>
+                            <li><strong>Shared Access:</strong> All team members share the same Astra score based on combined usage</li>
+                            <li><strong>Team Collaboration:</strong> Coordinate across your team to maximize transformation across Run, Build, and Grow</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <div class="accordion-icon">📋</div>
+                        <h4>Final Application Details</h4>
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p style="margin-bottom: 1rem;">Your Final Application submitted during March 16-20 must include:</p>
+                        <ul>
+                            <li><strong>Impact Statement:</strong> Answer the question "What positive impact are you able to make in the world with your new AI-Powered business?" This demonstrates alignment with our core mission and values</li>
+                            <li><strong>Run Summary (100 words):</strong> Describe how AI Rocket transformed your ability to run daily business operations</li>
+                            <li><strong>Build Summary (100 words):</strong> Explain the tools, systems, or capabilities you built using AI Rocket</li>
+                            <li><strong>Grow Summary (100 words):</strong> Detail the revenue growth and market expansion enabled by AI Rocket</li>
+                            <li><strong>Supporting Evidence:</strong> Optional metrics, screenshots, or documentation that supports your transformation story</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Applications are evaluated holistically by the AI Rocket Advisory Committee combining your written submissions (50%) with Astra Intelligence scores (50%).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eligibility Section -->
+    <section class="section" id="eligibility">
+        <div class="section-header">
+            <h2><span class="gradient-text">Who Can Participate</span></h2>
+            <p>Membership in qualifying entrepreneur masterminds required</p>
+        </div>
+
+        <div class="eligibility-grid">
+            <div class="eligibility-card">
+                <div class="eligibility-icon">🌟</div>
+                <h3>Gobundance</h3>
+                <p>Members of Gobundance mastermind</p>
+            </div>
+
+            <div class="eligibility-card">
+                <div class="eligibility-icon">🚀</div>
+                <h3>EO</h3>
+                <p>Entrepreneurs' Organization members worldwide</p>
+            </div>
+
+            <div class="eligibility-card">
+                <div class="eligibility-icon">💼</div>
+                <h3>YPO</h3>
+                <p>Young Presidents' Organization and YPO Gold members</p>
+            </div>
+
+            <div class="eligibility-card">
+                <div class="eligibility-icon">🎯</div>
+                <h3>Strategic Coach</h3>
+                <p>Strategic Coach program participants</p>
+            </div>
+
+            <div class="eligibility-card">
+                <div class="eligibility-icon">🧠</div>
+                <h3>Genius Network</h3>
+                <p>Genius Network members at all levels</p>
+            </div>
+
+            <div class="eligibility-card">
+                <div class="eligibility-icon">💎</div>
+                <h3>R360</h3>
+                <p>R360 community members</p>
+            </div>
+
+            <div class="eligibility-card">
+                <div class="eligibility-icon">👥</div>
+                <h3>Similar Groups</h3>
+                <p>Members of comparable entrepreneur mastermind organizations (subject to approval)</p>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="section-header">
+            <h2><span class="gradient-text">Frequently Asked Questions</span></h2>
+            <p>Everything you need to know about the challenge</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <h4>What are the prize values?</h4>
+                <p>The top 10 teams win equity prizes: 1st ($2M), 2nd ($1M), 3rd ($600K), 4th ($400K), 5th ($300K), 6th ($225K), 7th ($175K), 8th ($125K), 9th ($100K), 10th ($75K). All 10 winners also receive Lifetime Ultra Plan subscriptions. Values based on planned company valuation target of $250M. The company reserves the right to modify equity values based on the actual valuation established.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How does Astra Intelligence scoring work?</h4>
+                <p>Astra automatically tracks how your team uses AI Rocket throughout the challenge, assigning weighted scores across Run, Build, and Grow dimensions. These scores remain hidden until the challenge ends and represent 50% of your final evaluation score.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What is the Impact Statement?</h4>
+                <p>The Impact Statement is a required part of your Final Application where you answer: "What positive impact are you able to make in the world with your new AI-Powered business?" This demonstrates alignment with our core mission and constitutes 25% of your challenge score.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How is the final score calculated?</h4>
+                <p>Your final score combines three elements: Impact Statement (25%) demonstrating the positive impact you'll make in the world, RBG written summaries (25%) showing your transformation across Run-Build-Grow, and Astra Intelligence automated tracking (50%) measuring your actual AI Rocket usage. Additional factors include social media engagement and bonus points for team invitations.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How many team members can participate?</h4>
+                <p>Each team can include up to 3 members: 1 primary user and up to 2 additional invited team members. All team members get full unlimited access during the challenge.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Are there bonus points available?</h4>
+                <p>Yes, teams can earn bonus points through exceptional social media engagement and by inviting other eligible teams to join the challenge (until the 300-team capacity is reached).</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What happens if I don't win a top 10 spot?</h4>
+                <p>All teams that submit valid prize applications during the March 16-20 window receive a 1-year unlimited subscription to AI Rocket—regardless of final placement!</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I opt out of the challenge?</h4>
+                <p>Yes, you can opt-out at any time. However, opting out forfeits your unlimited subscription benefit. We hope you'll stay and participate!</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How are winners selected?</h4>
+                <p>Winners are selected by the AI Rocket Advisory Committee based on the scoring breakdown: Impact Statement demonstrating positive world impact (25%), RBG written summaries (25%), Astra Intelligence automated usage scores (50%), plus social media engagement and bonus points.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Which mastermind groups are eligible?</h4>
+                <p>Members of Gobundance, EO, YPO, Strategic Coach, Genius Network, R360, and similar entrepreneur mastermind groups are eligible.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How does AI Rocket handle my data privacy and security?</h4>
+                <p>AI Rocket syncs with your selected data only after you give authorization, and only with selected data directed by you. The data sync is fully encrypted to the highest industry standards. AI Rocket will not train on or use any user data without express written consent.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>When does registration open?</h4>
+                <p>Early-Access signup begins in mid-December 2025 for invited entrepreneurs. The Challenge officially launches January 1, 2026. Entry is limited to the first 300 teams who Launch their AI Rocket.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What happens after I register?</h4>
+                <p>You'll immediately receive unlimited access to AI Rocket for 90 days. Start using the platform to transform your business across Run, Build, and Grow dimensions while Astra Intelligence tracks your progress.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Conditions Section -->
+    <section class="section" id="terms">
+        <div class="section-header">
+            <h2><span class="gradient-text">Challenge Terms & Conditions</span></h2>
+            <p>Official rules and guidelines</p>
+        </div>
+
+        <div class="terms-container">
+            <div class="terms-header">
+                <h2>$5M AI Moonshot Challenge</h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Official Terms & Conditions</p>
+            </div>
+
+            <div class="terms-content">
+                <div class="terms-section-item">
+                    <h3>1. Challenge Overview & Eligibility</h3>
+                    <p>1.1. The AI Rocket $5M Moonshot Challenge (the "Challenge") is organized and administered by RocketHub.AI ("Health Rocket Ventures LLC" "we," "us," or "our").</p>
+                    <p>1.2. <strong>Eligibility Requirements:</strong> To participate in the Challenge, applicants must be verified members in good standing of one of the following entrepreneur mastermind organizations: Gobundance, Entrepreneurs' Organization (EO), Young Presidents' Organization (YPO), Strategic Coach, Genius Network, R360, or similar entrepreneur mastermind groups as determined by RocketHub.AI in its sole discretion.</p>
+                    <p>1.3. Participants must be at least 18 years of age and legally able to enter into binding agreements.</p>
+                    <p>1.4. Participation is limited to the first 300 eligible teams that complete registration. Teams consist of one (1) primary registrant and up to two (2) additional team members.</p>
+                    <p>1.5. Employees, contractors, and immediate family members of RocketHub.AI and its affiliates are not eligible to participate.</p>
+                    <p>1.6. Participation is subject to all applicable federal, state, and local laws and regulations.</p>
+                    <p>1.7. By registering for the Challenge, participants agree to be bound by these Terms & Conditions and all decisions of RocketHub.AI, which are final and binding.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>2. Challenge Period & Timeline</h3>
+                    <p>2.1. The Challenge begins on January 1, 2026 at 12:00:01 AM ET and runs through March 15, 2026 at 11:59:59 PM ET (the "Challenge Period").</p>
+                    <p>2.2. Prize applications must be submitted during the designated application window of March 16-20, 2026.</p>
+                    <p>2.3. Winners will be announced during the week of March 23-27, 2026.</p>
+                    <p>2.4. RocketHub.AI reserves the right to modify the Challenge timeline at its sole discretion with reasonable notice to participants.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>3. Prizes & Valuation</h3>
+                    <p>3.1. Prizes consist of Phantom Equity Units in Health Rocket Ventures LLC for the top 10 teams: 1st Place (0.80%), 2nd Place (0.40%), 3rd Place (0.24%), 4th Place (0.16%), 5th Place (0.12%), 6th Place (0.09%), 7th Place (0.07%), 8th Place (0.05%), 9th Place (0.04%), 10th Place (0.03%). At the Sponsor's target company valuation of $250M, these stakes would represent approximately $2M, $1M, $600K, $400K, $300K, $225K, $175K, $125K, $100K, and $75K respectively.</p>
+                    <p>3.2. <strong>IMPORTANT - NATURE OF PHANTOM EQUITY:</strong> Phantom Equity Units are contractual rights to receive a cash payment upon a Qualifying Liquidity Event (defined as a sale, merger, acquisition, or IPO of Health Rocket Ventures LLC). Phantom Equity Units do NOT constitute actual ownership, membership interests, or securities in HRV or any related entity. Holders have no voting rights, no rights to distributions, no rights to inspect company records, and no other rights associated with actual equity ownership.</p>
+                    <p>3.3. <strong>VALUATION DISCLAIMER:</strong> Dollar values stated herein are based on projected future company valuations and are provided for illustrative purposes only. Health Rocket Ventures LLC is a pre-revenue startup. The current fair market value of these Phantom Equity Units is undetermined and may be nominal. Actual payout value, if any, will depend entirely on whether a Qualifying Liquidity Event occurs and the company valuation at that time. There is no guarantee that a Qualifying Liquidity Event will ever occur.</p>
+                    <p>3.4. Equity prizes are subject to standard vesting schedules, transfer restrictions, and other terms as determined by RocketHub.AI and set forth in applicable equity grant documentation.</p>
+                    <p>3.5. All 10 winners will also receive Lifetime Ultra Plan subscriptions to AI Rocket products. All teams submitting valid prize applications who do not place in the top 10 will receive 1-year unlimited subscriptions.</p>
+                    <p>3.6. Prizes are non-transferable and may not be exchanged for cash unless expressly agreed to in writing by RocketHub.AI.</p>
+                    <p>3.7. Winners are solely responsible for all taxes, fees, and other costs associated with receiving and holding equity prizes.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>4. Judging & Selection</h3>
+                    <p>4.1. Winners will be selected by the AI Rocket Advisory Committee based on a scoring system that weights Impact Statement (25%), RBG Matrix written summaries (25%), Astra Intelligence automated scoring (50%), social media engagement, and invite points earned.</p>
+                    <p>4.2. <strong>Impact Statement:</strong> Teams must answer the question "What positive impact are you able to make in the world with your new AI-Powered business?" as part of their Final Application. This demonstrates alignment with RocketHub.AI's core mission and values.</p>
+                    <p>4.3. <strong>RBG Matrix Summaries:</strong> Teams must submit written summaries (100 words each) describing their transformation across Run, Build, and Grow dimensions.</p>
+                    <p>4.4. <strong>Astra Intelligence Scoring:</strong> Astra will track and score participant usage of AI Rocket throughout the Challenge Period. These scores are proprietary and will not be disclosed to participants until after the Challenge concludes.</p>
+                    <p>4.5. All judging decisions are final and binding. RocketHub.AI reserves sole discretion in determining winners and resolving any disputes.</p>
+                    <p>4.6. RocketHub.AI reserves the right to disqualify any submission that violates these terms, is fraudulent, or is otherwise objectionable at RocketHub.AI's sole discretion.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>5. Participant Conduct & Obligations</h3>
+                    <p>5.1. Participants agree to use AI Rocket in good faith for legitimate business purposes during the Challenge Period.</p>
+                    <p>5.2. Participants must not engage in any fraudulent, deceptive, or manipulative activities to artificially inflate scores or metrics.</p>
+                    <p>5.3. Participants who want to be eligible for prizes must complete a minimum of 5 unique social media posts tagging RocketHub.AI and AI Rocket on approved platforms (LinkedIn, X/Twitter, Facebook) during the Challenge Period.</p>
+                    <p>5.4. To be eligible for prizes, participants must submit a complete Prize Application during the designated application window (March 16-20, 2026). The application must include an Impact Statement and RBG Matrix summaries.</p>
+                    <p>5.5. Participants may earn bonus points by inviting other eligible teams to join the Challenge until capacity is reached.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>6. Intellectual Property & Content Rights</h3>
+                    <p>6.1. By submitting a Prize Application, participants grant RocketHub.AI a perpetual, worldwide, royalty-free, non-exclusive license to use, reproduce, modify, publish, and display the content of their application (including Impact Statement and RBG summaries) for marketing, promotional, and educational purposes.</p>
+                    <p>6.2. Participants who submit Prize Applications agree to allow RocketHub.AI to use their name, likeness, company name, testimonials, and transformation outcomes in marketing and promotional materials.</p>
+                    <p>6.3. Participants retain ownership of their own business data and any proprietary information not expressly submitted as part of their Prize Application.</p>
+                    <p>6.4. RocketHub.AI retains all rights to Astra Intelligence scoring methodologies, AI Rocket platform technology, and all proprietary systems used in the Challenge.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>7. Privacy & Data</h3>
+                    <p>7.1. RocketHub.AI will collect and process participant data in accordance with its <a href="https://rockethub.ai/privacy" target="_blank">Privacy Policy</a>.</p>
+                    <p>7.2. Participant usage data will be tracked and analyzed by Astra Intelligence for scoring purposes during the Challenge.</p>
+                    <p>7.3. RocketHub.AI agrees to keep individual user information private and will only share anonymized or aggregated data for general marketing purposes, except as expressly permitted in Prize Applications.</p>
+                    <p>7.4. Participants may request deletion of their data by opting out of the Challenge, subject to RocketHub.AI's data retention policies.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>8. Withdrawal & Disqualification</h3>
+                    <p>8.1. Participants may opt out of the Challenge at any time by providing written notice to RocketHub.AI.</p>
+                    <p>8.2. Participants who opt out forfeit eligibility for all prizes, including the 1-year unlimited subscription participation bonus.</p>
+                    <p>8.3. RocketHub.AI reserves the right to disqualify any participant who violates these terms, engages in fraudulent activity, or acts in a manner that is harmful to the Challenge, other participants, or RocketHub.AI's reputation.</p>
+                    <p>8.4. Disqualified participants forfeit all prizes and may be banned from future RocketHub.AI challenges and promotions.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>9. Limitation of Liability</h3>
+                    <p>9.1. TO THE MAXIMUM EXTENT PERMITTED BY LAW, ROCKETHUB.AI, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO PARTICIPATION IN THE CHALLENGE.</p>
+                    <p>9.2. RocketHub.AI's total liability for any claims arising from the Challenge shall not exceed the value of the prizes offered.</p>
+                    <p>9.3. RocketHub.AI is not responsible for technical failures, network issues, or other circumstances beyond its reasonable control that may affect participation or scoring.</p>
+                    <p>9.4. Participants agree to indemnify and hold harmless RocketHub.AI from any claims, damages, or expenses arising from their participation in the Challenge or violation of these terms.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>10. Disclaimers</h3>
+                    <p>10.1. The Challenge and all prizes are provided "as is" without warranties of any kind, express or implied.</p>
+                    <p>10.2. RocketHub.AI makes no representations or warranties regarding the value, liquidity, or future performance of equity prizes.</p>
+                    <p>10.3. Participants acknowledge that equity investments involve risk and that the value of equity prizes may increase or decrease.</p>
+                    <p>10.4. RocketHub.AI does not guarantee that the Wefunder Community Raise campaign will achieve its valuation target or be completed as planned.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>11. Modifications & Termination</h3>
+                    <p>11.1. RocketHub.AI reserves the right to modify, suspend, or terminate the Challenge at any time for any reason, including but not limited to fraud, technical issues, or circumstances that compromise the integrity of the Challenge.</p>
+                    <p>11.2. In the event of termination, RocketHub.AI may, at its sole discretion, award prizes based on entries received prior to termination or provide alternative compensation to participants.</p>
+                    <p>11.3. RocketHub.AI reserves the right to modify these Terms & Conditions at any time. Material changes will be communicated to participants via email or platform notification.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>12. Governing Law & Disputes</h3>
+                    <p>12.1. These Terms & Conditions shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to conflict of law principles.</p>
+                    <p>12.2. Any disputes arising from or related to the Challenge shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.</p>
+                    <p>12.3. Participants waive any right to participate in class action lawsuits or class-wide arbitration related to the Challenge.</p>
+                    <p>12.4. The prevailing party in any dispute shall be entitled to recover reasonable attorneys' fees and costs.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>13. General Provisions</h3>
+                    <p>13.1. These Terms & Conditions constitute the entire agreement between participants and RocketHub.AI regarding the Challenge.</p>
+                    <p>13.2. If any provision of these terms is found to be unenforceable, the remaining provisions shall continue in full force and effect.</p>
+                    <p>13.3. RocketHub.AI's failure to enforce any provision shall not constitute a waiver of that provision.</p>
+                    <p>13.4. Participants may not assign or transfer their participation or any rights under these terms without RocketHub.AI's prior written consent.</p>
+                </div>
+
+                <div class="terms-section-item">
+                    <h3>14. Contact Information</h3>
+                    <p>For questions about the Challenge or these Terms & Conditions, please contact:</p>
+                    <p><strong>RocketHub.AI</strong><br>
+                    Email: <a href="mailto:info@rockethub.ai">info@rockethub.ai</a><br>
+                    Website: <a href="https://www.airocket.app" target="_blank">https://www.airocket.app</a></p>
+                </div>
+
+                <div class="terms-effective">
+                    <p><strong>Effective Date:</strong> December 1, 2025</p>
+                    <p><strong>Last Updated:</strong> December 8, 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="signup">
+        <h2><span class="gradient-text">Ready to Transform?</span></h2>
+        <p>Join 300 elite entrepreneurs competing to build AI-Powered businesses</p>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days">--</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours">--</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes">--</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds">--</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+
+        <div class="cta-group">
+            <a href="https://rockethub.ai" class="btn btn-primary">🚀 Enter the Challenge</a>
+        </div>
+        <p class="cta-terms-notice">By entering, you agree to the <a href="#terms">Challenge Terms & Conditions</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand"><span class="gradient-text">RocketHub.AI</span></div>
+        <div class="footer-links">
+            <a href="https://rockethub.ai">Home</a>
+            <a href="https://rockethub.ai/ai-rocket">AI Rocket</a>
+            <a href="https://rockethub.ai/terms">Terms</a>
+            <a href="https://rockethub.ai/privacy">Privacy</a>
+        </div>
+        <p class="footer-copy">© 2026 RocketHub.AI — Level Up Entrepreneurs Using AI</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Navigation active state
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveNav() {
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                
+                if (scrollPos >= top && scrollPos < top + height) {
+                    navTabs.forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.getAttribute('href') === '#' + id) {
+                            tab.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // Smooth scroll for nav tabs
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = tab.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Countdown Timer - countdown to Jan 1, 2026
+        function updateCountdown() {
+            const targetDate = new Date('2026-01-01T00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Challenge has started
+                document.getElementById('days').textContent = '🚀';
+                document.getElementById('hours').textContent = 'LIVE';
+                document.getElementById('minutes').textContent = 'NOW';
+                document.getElementById('seconds').textContent = '!';
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Add animation to cards
+        document.querySelectorAll('.prize-card, .rbg-card, .faq-item, .eligibility-card').forEach(el => {
+      
